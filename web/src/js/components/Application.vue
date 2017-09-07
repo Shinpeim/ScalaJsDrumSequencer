@@ -1,14 +1,20 @@
 <template>
     <div>
-        hello world
+        <navigation></navigation>
+        <div class="container">
+            <control-panel></control-panel>
+            <pattern-editor></pattern-editor>
+        </div>
     </div>
 </template>
 <script>
-    import {Test} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import ControlPanel from './ControlPanel.vue'
+    import PatternEditor from './PatternEditor.vue'
 
     export default {
-        created(){
-            (new Test).hello();
+        components: {
+            ControlPanel,
+            PatternEditor
         }
     }
 </script>
