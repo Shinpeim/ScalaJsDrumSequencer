@@ -4,5 +4,12 @@
     </div>
 </template>
 <script>
-    export default {}
+    // todo: fastoptではなくてopt読み込む
+    import {Test} from '../../../../scala/target/scala-2.12/scalajstodo-fastopt'
+
+    export default {
+        created(){
+            (new Test).hello();
+        }
+    }
 </script>
