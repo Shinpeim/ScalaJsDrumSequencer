@@ -25,13 +25,13 @@
                             Pattern: {{selectedPatternId}}
                         </span>
                         <div>
-                            <input name="pattern" type="radio" value="1" id="radio-pattern-1" v-model="selectedPatternId" @change="setPatternId"/>
+                            <input name="pattern" type="radio" value="A" id="radio-pattern-1" v-model="selectedPatternId" @change="setPatternId"/>
                             <label for="radio-pattern-1"></label>
-                            <input name="pattern" type="radio" value="2" id="radio-pattern-2" v-model="selectedPatternId" @change="setPatternId"/>
+                            <input name="pattern" type="radio" value="B" id="radio-pattern-2" v-model="selectedPatternId" @change="setPatternId"/>
                             <label for="radio-pattern-2"></label>
-                            <input name="pattern" type="radio" value="3" id="radio-pattern-3" v-model="selectedPatternId" @change="setPatternId"/>
+                            <input name="pattern" type="radio" value="C" id="radio-pattern-3" v-model="selectedPatternId" @change="setPatternId"/>
                             <label for="radio-pattern-3"></label>
-                            <input name="pattern" type="radio" value="4" id="radio-pattern-4" v-model="selectedPatternId" @change="setPatternId"/>
+                            <input name="pattern" type="radio" value="D" id="radio-pattern-4" v-model="selectedPatternId" @change="setPatternId"/>
                             <label for="radio-pattern-4"></label>
                         </div>
                     </div>
@@ -41,13 +41,16 @@
     </div>
 </template>
 <script>
+    import {SequencerQuery} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+
     export default {
         created(){
         },
+
         data(){
             return {
                 bpm: 120,
-                selectedPatternId: 1,
+                selectedPatternId: (new SequencerQuery).selectedPatternId(),
                 isPlaying: false,
                 isSoundsInited: true
             }

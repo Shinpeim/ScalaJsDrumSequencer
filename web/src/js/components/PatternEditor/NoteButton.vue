@@ -13,11 +13,11 @@
     </div>
 </template>
 <script>
+    import {SequencerQuery} from '../../../../../scala/target/scala-2.12/scalajstodo-opt'
+
     export default {
         props: ['index'],
 
-        created(){
-        },
         computed:{
             isPlayingBeat(){
                 if (this.playingNoteIndex == null) {
@@ -26,10 +26,11 @@
                 return (Math.floor(this.playingNoteIndex / 4) == Math.floor(this.index / 4));
             }
         },
+
         data(){
             return {
-                notes: {},
-                playingNoteIndex: 0
+                notes: (new SequencerQuery).notes(),
+                playingNoteIndex: -1
             }
         },
         methods: {

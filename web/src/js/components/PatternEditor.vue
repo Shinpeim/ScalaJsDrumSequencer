@@ -58,12 +58,21 @@
 </template>
 <script>
     import NoteButton from './PatternEditor/NoteButton.vue'
+
+    import {SequencerQuery} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+
     export default {
         components: {NoteButton},
 
         data(){
             return {
-                selectedTrack: "BD"
+                selectedTrack: (new SequencerQuery).selectedTrackName()
+            }
+        },
+
+        methods: {
+            setTrack(){
+
             }
         }
     }

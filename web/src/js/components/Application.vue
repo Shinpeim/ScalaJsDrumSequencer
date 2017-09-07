@@ -8,11 +8,13 @@
     </div>
 </template>
 <script>
+    import Navigation from './Navigation.vue'
     import ControlPanel from './ControlPanel.vue'
     import PatternEditor from './PatternEditor.vue'
 
     export default {
         components: {
+            Navigation,
             ControlPanel,
             PatternEditor
         }
