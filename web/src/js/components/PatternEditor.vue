@@ -59,7 +59,7 @@
 <script>
     import NoteButton from './PatternEditor/NoteButton.vue'
 
-    import {SequencerQuery} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {SequencerQuery, SequencerCommand} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
 
     export default {
         components: {NoteButton},
@@ -72,7 +72,7 @@
 
         methods: {
             setTrack(){
-
+                (new SequencerCommand).selectTrack(this.selectedTrack);
             }
         }
     }

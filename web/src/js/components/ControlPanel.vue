@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-    import {SequencerQuery} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {SequencerQuery, SequencerCommand} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
 
     export default {
         created(){
@@ -68,6 +68,7 @@
             setBpm(){
             },
             setPatternId() {
+                (new SequencerCommand).selectPattern(this.selectedPatternId);
             },
             togglePlayingState(){
             }

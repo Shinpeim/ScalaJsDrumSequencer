@@ -13,10 +13,20 @@
     </div>
 </template>
 <script>
-    import {SequencerQuery} from '../../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {SequencerQuery, SequencerCommand, SequencerEvents} from '../../../../../scala/target/scala-2.12/scalajstodo-opt'
 
     export default {
         props: ['index'],
+
+        mounted(){
+            SequencerEvents.SequencerStateChanged.subscribe(() => {
+                this.updateNote();
+            });
+
+            SequencerEvents.TrackStateChanged.subscribe(() => {
+                this.updateNote();
+            });
+        },
 
         computed:{
             isPlayingBeat(){
@@ -35,6 +45,11 @@
         },
         methods: {
             toggleNote(index) {
+                (new SequencerCommand).toggleNote(parseInt(index));
+            },
+
+            updateNote(){
+                this.notes = (new SequencerQuery).notes();
             }
         }
     }

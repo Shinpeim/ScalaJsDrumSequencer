@@ -1,6 +1,7 @@
 package com.nekogata.scalajs_drum_sequencer.infrastructure
 
 import com.nekogata.scalajs_drum_sequencer.domain.sequener._
+import com.nekogata.scalajs_drum_sequencer.js_exports.SequencerEvents
 
 /**
   * Created by shinpei on 2017/09/07.
@@ -10,6 +11,8 @@ class TrackRepositoryImpl extends TrackRepository{
 
   override def store(p: PatternId, tn: TrackName, t: Track): Unit = {
     TrackRepositoryImpl.state = TrackRepositoryImpl.state.updated((p, tn), t)
+
+    SequencerEvents.TrackStateChanged.fire()
   }
 }
 
