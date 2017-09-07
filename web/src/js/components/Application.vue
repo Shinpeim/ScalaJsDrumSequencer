@@ -12,11 +12,21 @@
     import ControlPanel from './ControlPanel.vue'
     import PatternEditor from './PatternEditor.vue'
 
+    import {PlayerCommand} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+
     export default {
         components: {
             Navigation,
             ControlPanel,
             PatternEditor
+        },
+
+        created(){
+            const command = new PlayerCommand;
+            command.loadHHSounds();
+            command.loadRSSounds();
+            command.loadSDSounds();
+            command.loadBDSounds();
         }
     }
 </script>

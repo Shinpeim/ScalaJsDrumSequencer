@@ -1,7 +1,8 @@
 package com.nekogata.scalajs_drum_sequencer.js_exports
 
 import com.nekogata.scalajs_drum_sequencer.domain.player.PlayerStateRepository
-import com.nekogata.scalajs_drum_sequencer.infrastructure.PlayerStateRepositoryImpl
+import com.nekogata.scalajs_drum_sequencer.domain.sound.SoundRepository
+import com.nekogata.scalajs_drum_sequencer.infrastructure.{PlayerStateRepositoryImpl, SoundRepositoryImpl}
 import com.nekogata.scalajs_drum_sequencer.query.PlayerQuery
 
 import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
@@ -10,6 +11,7 @@ import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 @JSExportTopLevel("PlayerQuery")
 class PlayerQueryImpl extends PlayerQuery {
   override val playerStateRepository: PlayerStateRepository = new PlayerStateRepositoryImpl
+  override val soundRepository: SoundRepository = new SoundRepositoryImpl
 
   @JSExport
   override def bpm(): Int = super.bpm()

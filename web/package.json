@@ -5,8 +5,8 @@
   "author": "Shinpei Maruyama",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && cp src/index.html build/index.html && webpack",
-    "watch": "npm run clean && cp src/index.html build/index.html && webpack -w",
+    "build": "npm run clean && mkdir build/sounds && cp src/index.html build/index.html && cp src/sounds/* build/sounds/  && webpack",
+    "watch": "npm run clean && mkdir build/sounds && cp src/index.html build/index.html && cp src/sounds/* build/sounds/ && webpack -w",
     "clean": "rm -rf build/*"
   },
   "devDependencies": {

@@ -16,6 +16,18 @@ class PlayerCommandImpl extends PlayerCommand {
   override val soundRepository: SoundRepository = new SoundRepositoryImpl
 
   @JSExport
+  override def loadBDSounds(): Unit = super.loadBDSounds()
+
+  @JSExport
+  override def loadHHSounds(): Unit = super.loadHHSounds()
+
+  @JSExport
+  override def loadRSSounds(): Unit = super.loadRSSounds()
+
+  @JSExport
+  override def loadSDSounds(): Unit = super.loadSDSounds()
+
+  @JSExport
   override def play(): Unit = super.play()
 
   @JSExport

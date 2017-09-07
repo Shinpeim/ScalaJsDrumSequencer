@@ -12,7 +12,7 @@ class PlayerStateRepositoryImpl extends PlayerStateRepository{
 }
 
 object PlayerStateRepositoryImpl {
-  var state: PlayerState = new PlayerState(120, true, NotPlaying)
+  var state: PlayerState = new PlayerState(120, NotPlaying)
 }
 
 

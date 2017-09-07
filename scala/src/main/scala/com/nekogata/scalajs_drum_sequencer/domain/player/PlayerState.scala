@@ -2,7 +2,6 @@ package com.nekogata.scalajs_drum_sequencer.domain.player
 
 case class PlayerState(
   val bpm: Int,
-  val areSoundsReady: Boolean,
   val playingNotePosition: PlayingNotePosition
 ) {
 
@@ -16,10 +15,6 @@ case class PlayerState(
   }
 
   def play():PlayerState = {
-    if ( ! areSoundsReady ) {
-      return this
-    }
-
     if ( playingNotePosition != NotPlaying) {
       return this
     }
