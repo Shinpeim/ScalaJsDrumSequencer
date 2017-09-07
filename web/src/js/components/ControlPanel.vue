@@ -4,7 +4,7 @@
             <div class="card horizontal">
                 <div class="card-image left-pane brown">
                     <div class="card-content">
-                        <a :class="{'disabled': ! isSoundsInited}" class="btn-floating btn-large waves-effect waves-light" @click="togglePlayingState">
+                        <a :class="{'disabled': ! areSoundsReady}" class="btn-floating btn-large waves-effect waves-light" @click="togglePlayingState">
                             <i class="material-icons">{{playButtonIcon}}</i>
                         </a>
                     </div>
@@ -41,18 +41,24 @@
     </div>
 </template>
 <script>
-    import {SequencerQuery, SequencerCommand} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {SequencerQuery, PlayerQuery, SequencerCommand, PlayerCommand, PlayerEvents} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
 
     export default {
-        created(){
+        mounted(){
+            const playerQuery = new PlayerQuery;
+            PlayerEvents.PlayerStateChanged.subscribe(() => {
+                this.isPlaying =  playerQuery.isPlaying();
+                this.areSoundsReady = playerQuery.areSoundsReady();
+            })
         },
 
         data(){
+            const playerQuery = new PlayerQuery;
             return {
-                bpm: 120,
+                bpm: playerQuery.bpm(),
                 selectedPatternId: (new SequencerQuery).selectedPatternId(),
-                isPlaying: false,
-                isSoundsInited: true
+                isPlaying: playerQuery.isPlaying(),
+                areSoundsReady: playerQuery.areSoundsReady()
             }
         },
         computed:{
@@ -71,6 +77,12 @@
                 (new SequencerCommand).selectPattern(this.selectedPatternId);
             },
             togglePlayingState(){
+                const command = new PlayerCommand
+                if (this.isPlaying) {
+                    command.stop()
+                } else {
+                    command.play()
+                }
             }
         }
     }
