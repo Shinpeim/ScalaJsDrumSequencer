@@ -23,10 +23,7 @@
 
         created(){
             const command = new PlayerCommand;
-            command.loadHHSounds();
-            command.loadRSSounds();
-            command.loadSDSounds();
-            command.loadBDSounds();
+            command.loadSounds();
         }
     }
 </script>
