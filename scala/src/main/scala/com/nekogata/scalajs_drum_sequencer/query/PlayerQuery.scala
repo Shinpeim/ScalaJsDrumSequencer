@@ -1,7 +1,7 @@
 package com.nekogata.scalajs_drum_sequencer.query
 
 import com.nekogata.scalajs_drum_sequencer.domain.player.{NotPlaying, PlayerStateRepository, PlayingAt}
-import com.nekogata.scalajs_drum_sequencer.domain.sequener.{BD, HH, RS, SD}
+import com.nekogata.scalajs_drum_sequencer.domain.sequener._
 import com.nekogata.scalajs_drum_sequencer.domain.sound.SoundRepository
 
 trait PlayerQuery {
@@ -20,6 +20,21 @@ trait PlayerQuery {
 
     (hhLoaded && rsLoaded && sdLoaded && bdLoaded)
   }
+
+  def playingPatternId(): String = playerStateRepository.get.playingPatternId match {
+    case PatternA => "A"
+    case PatternB => "B"
+    case PatternC => "C"
+    case PatternD => "D"
+  }
+
+  def nextPatternId(): String = playerStateRepository.get.nextPatternId match {
+    case PatternA => "A"
+    case PatternB => "B"
+    case PatternC => "C"
+    case PatternD => "D"
+  }
+
 
   def playingNotePosition(): Int  = playerStateRepository.get.playingNotePosition match {
     case NotPlaying => -1
