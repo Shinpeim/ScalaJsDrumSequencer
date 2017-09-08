@@ -38,9 +38,14 @@ class NotYetLoadedSoundImpl extends Sound {
 class LoadedSoundImpl(val buffer:AudioBuffer) extends Sound {
   override def isLoaded(): Boolean = true
 
-  override def load(fileURL: String): Future[Sound] = ???
+  override def load(fileURL: String): Future[Sound] = Future.successful(this)
 
-  override def play(): Unit = println("play sound")
+  override def play(): Unit = {
+    val source = Sound.context.createBufferSource()
+    source.buffer = buffer
+    source.connect(Sound.context.destination)
+    source.start(0)
+  }
 }
 
 object Sound {
