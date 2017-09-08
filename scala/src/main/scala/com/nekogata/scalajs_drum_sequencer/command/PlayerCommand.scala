@@ -8,7 +8,6 @@ import scala.scalajs.js.timers._
 
 trait PlayerCommand {
   val playerStateRepository: PlayerStateRepository
-  val sequencerStateRepository: SequencerStateRepository
   val trackRepository: TrackRepository
   val soundRepository: SoundRepository
 
@@ -51,6 +50,19 @@ trait PlayerCommand {
     }
   }
 
+  def setNextPattern(id: String): Unit = {
+    val patternId = id match {
+      case "A" => PatternA
+      case "B" => PatternB
+      case "C" => PatternC
+      case "D" => PatternD
+    }
+    val playerState = playerStateRepository.get
+    val newState = playerState.setNextPatternId(patternId)
+    playerStateRepository.store(newState)
+
+  }
+
   import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
   def loadHHSounds(): Unit = {
     val sound = soundRepository.get(HH)
@@ -71,17 +83,16 @@ trait PlayerCommand {
 
   def playCurrentPositionSound(): Unit ={
     val playerState = playerStateRepository.get
-    val sequencerState = sequencerStateRepository.get
 
     val currentPlayingPosition = playerState.playingNotePosition match {
       case NotPlaying => return
       case PlayingAt(n) => n
     }
 
-    val hhTrack = trackRepository.get(sequencerState.selectedPatternId, HH)
-    val rsTrack = trackRepository.get(sequencerState.selectedPatternId, RS)
-    val sdTrack = trackRepository.get(sequencerState.selectedPatternId, SD)
-    val bdTrack = trackRepository.get(sequencerState.selectedPatternId, BD)
+    val hhTrack = trackRepository.get(playerState.playingPatternId, HH)
+    val rsTrack = trackRepository.get(playerState.playingPatternId, RS)
+    val sdTrack = trackRepository.get(playerState.playingPatternId, SD)
+    val bdTrack = trackRepository.get(playerState.playingPatternId, BD)
 
     val hhSound = soundRepository.get(HH)
     val rsSound = soundRepository.get(RS)
