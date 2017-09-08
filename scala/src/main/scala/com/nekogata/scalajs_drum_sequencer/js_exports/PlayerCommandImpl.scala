@@ -11,7 +11,6 @@ import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 @JSExportTopLevel("PlayerCommand")
 class PlayerCommandImpl extends PlayerCommand {
   override val playerStateRepository: PlayerStateRepository = new PlayerStateRepositoryImpl
-  override val sequencerStateRepository: SequencerStateRepository = new SequencerStateRepositoryImpl
   override val trackRepository: TrackRepository = new TrackRepositoryImpl
   override val soundRepository: SoundRepository = new SoundRepositoryImpl
 
@@ -35,4 +34,7 @@ class PlayerCommandImpl extends PlayerCommand {
 
   @JSExport
   override def setBpm(bpm: Int): Unit = super.setBpm(bpm)
+
+  @JSExport
+  override def setNextPattern(id: String): Unit = super.setNextPattern(id)
 }

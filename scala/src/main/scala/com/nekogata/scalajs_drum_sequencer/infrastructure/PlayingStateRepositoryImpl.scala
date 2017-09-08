@@ -1,6 +1,7 @@
 package com.nekogata.scalajs_drum_sequencer.infrastructure
 
 import com.nekogata.scalajs_drum_sequencer.domain.player.{NotPlaying, PlayerState, PlayerStateRepository}
+import com.nekogata.scalajs_drum_sequencer.domain.sequener.PatternA
 import com.nekogata.scalajs_drum_sequencer.js_exports.PlayerEvents
 
 class PlayerStateRepositoryImpl extends PlayerStateRepository{
@@ -12,7 +13,7 @@ class PlayerStateRepositoryImpl extends PlayerStateRepository{
 }
 
 object PlayerStateRepositoryImpl {
-  var state: PlayerState = new PlayerState(120, NotPlaying)
+  var state: PlayerState = new PlayerState(120, NotPlaying, PatternA, PatternA)
 }
 
 

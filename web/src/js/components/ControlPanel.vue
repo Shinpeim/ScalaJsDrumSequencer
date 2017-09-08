@@ -78,6 +78,7 @@
             },
             setPatternId() {
                 (new SequencerCommand).selectPattern(this.selectedPatternId);
+                (new PlayerCommand).setNextPattern(this.selectedPatternId);
             },
             togglePlayingState(){
                 const command = new PlayerCommand;
