@@ -10,7 +10,7 @@ sbt fullOptJS;
 cd ../web;
 npm run build;
 cd ..;
-git add web/build;
+git add -f web/build;
 git commit -m 'deploy';
 git push origin master;
 git co development;
