@@ -72,12 +72,15 @@
         },
         methods: {
             setBpm(){
+                const bpm = parseInt(document.getElementById('bpm-slider').value)
+                this.bpm = bpm;
+                (new PlayerCommand).setBpm(bpm);
             },
             setPatternId() {
                 (new SequencerCommand).selectPattern(this.selectedPatternId);
             },
             togglePlayingState(){
-                const command = new PlayerCommand
+                const command = new PlayerCommand;
                 if (this.isPlaying) {
                     command.stop()
                 } else {
