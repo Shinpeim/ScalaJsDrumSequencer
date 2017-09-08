@@ -1,6 +1,6 @@
 enablePlugins(ScalaJSPlugin)
 
-name := "ScalaJSTodo"
+name := "ScalaJSDrumSequencer"
 
 version := "1.0"
 

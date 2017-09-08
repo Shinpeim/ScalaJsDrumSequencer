@@ -12,7 +12,7 @@
     import ControlPanel from './ControlPanel.vue'
     import PatternEditor from './PatternEditor.vue'
 
-    import {PlayerCommand} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {PlayerCommand} from '../../../../scala/target/scala-2.12/scalajsdrumsequencer-opt'
 
     export default {
         components: {

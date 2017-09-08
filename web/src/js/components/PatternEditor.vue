@@ -59,7 +59,7 @@
 <script>
     import NoteButton from './PatternEditor/NoteButton.vue'
 
-    import {SequencerQuery, SequencerCommand} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {SequencerQuery, SequencerCommand} from '../../../../scala/target/scala-2.12/scalajsdrumsequencer-opt'
 
     export default {
         components: {NoteButton},

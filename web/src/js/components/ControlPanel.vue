@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-    import {SequencerQuery, PlayerQuery, SequencerCommand, PlayerCommand, PlayerEvents} from '../../../../scala/target/scala-2.12/scalajstodo-opt'
+    import {SequencerQuery, PlayerQuery, SequencerCommand, PlayerCommand, PlayerEvents} from '../../../../scala/target/scala-2.12/scalajsdrumsequencer-opt'
 
     export default {
         mounted(){
