@@ -864,9 +864,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+if (window.webkitAudioContext) {
+    window.AudioContext = window.webkitAudioContext;
+}
+
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-      el: '#app',
-      components: { Application: __WEBPACK_IMPORTED_MODULE_1__components_Application_vue__["a" /* default */] }
+    el: '#app',
+    components: { Application: __WEBPACK_IMPORTED_MODULE_1__components_Application_vue__["a" /* default */] }
 });
 
 /***/ }),
