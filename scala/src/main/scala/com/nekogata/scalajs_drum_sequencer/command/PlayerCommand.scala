@@ -63,22 +63,17 @@ trait PlayerCommand {
 
   }
 
-  import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
-  def loadHHSounds(): Unit = {
-    val sound = soundRepository.get(HH)
-    sound.load("./sounds/hh.wav").foreach(s => soundRepository.store(HH, s))
-  }
-  def loadRSSounds(): Unit = {
-    val sound = soundRepository.get(RS)
-    sound.load("./sounds/rs.wav").foreach(s => soundRepository.store(RS, s))
-  }
-  def loadSDSounds(): Unit = {
-    val sound = soundRepository.get(SD)
-    sound.load("./sounds/sd.wav").foreach(s => soundRepository.store(SD, s))
-  }
-  def loadBDSounds(): Unit = {
-    val sound = soundRepository.get(BD)
-    sound.load("./sounds/bd.wav").foreach(s => soundRepository.store(BD, s))
+  def loadSounds(): Unit = {
+    import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
+    val hhSound = soundRepository.get(HH)
+    val rsSound = soundRepository.get(RS)
+    val sdSound = soundRepository.get(SD)
+    val bdSound = soundRepository.get(BD)
+
+    hhSound.load("./sounds/hh.wav").foreach(s => soundRepository.store(HH, s))
+    rsSound.load("./sounds/rs.wav").foreach(s => soundRepository.store(RS, s))
+    sdSound.load("./sounds/sd.wav").foreach(s => soundRepository.store(SD, s))
+    bdSound.load("./sounds/bd.wav").foreach(s => soundRepository.store(BD, s))
   }
 
   def playCurrentPositionSound(): Unit ={
