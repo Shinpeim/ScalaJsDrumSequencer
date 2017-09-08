@@ -1,6 +1,6 @@
 package com.nekogata.scalajs_drum_sequencer.infrastructure
 
-import com.nekogata.scalajs_drum_sequencer.domain.sequener.{HH, SequencerState, SequencerStateRepository}
+import com.nekogata.scalajs_drum_sequencer.domain.sequener.{BD, SequencerState, SequencerStateRepository}
 import com.nekogata.scalajs_drum_sequencer.js_exports.SequencerEvents
 
 class SequencerStateRepositoryImpl extends SequencerStateRepository{
@@ -13,5 +13,5 @@ class SequencerStateRepositoryImpl extends SequencerStateRepository{
 }
 
 object SequencerStateRepositoryImpl {
-  var state: SequencerState = new SequencerState(HH)
+  var state: SequencerState = new SequencerState(BD)
 }
