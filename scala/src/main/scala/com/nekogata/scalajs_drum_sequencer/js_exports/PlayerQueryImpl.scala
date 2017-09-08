@@ -14,6 +14,12 @@ class PlayerQueryImpl extends PlayerQuery {
   override val soundRepository: SoundRepository = new SoundRepositoryImpl
 
   @JSExport
+  override def nextPatternId(): String = super.nextPatternId()
+
+  @JSExport
+  override def playingPatternId(): String = super.playingPatternId()
+
+  @JSExport
   override def bpm(): Int = super.bpm()
 
   @JSExport

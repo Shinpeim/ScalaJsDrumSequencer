@@ -56,7 +56,7 @@
             const playerQuery = new PlayerQuery;
             return {
                 bpm: playerQuery.bpm(),
-                selectedPatternId: (new SequencerQuery).selectedPatternId(),
+                selectedPatternId: playerQuery.playingPatternId(),
                 isPlaying: playerQuery.isPlaying(),
                 areSoundsReady: playerQuery.areSoundsReady()
             }
@@ -77,7 +77,6 @@
                 (new PlayerCommand).setBpm(bpm);
             },
             setPatternId() {
-                (new SequencerCommand).selectPattern(this.selectedPatternId);
                 (new PlayerCommand).setNextPattern(this.selectedPatternId);
             },
             togglePlayingState(){
