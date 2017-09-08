@@ -1,3 +1,23 @@
+<style scoped>
+    .pattern-selector {
+        border: solid 1px;
+        border-radius: 2px;
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-right: 16px;
+        background-color: gainsboro;
+        cursor: pointer;
+    }
+
+    .next {
+        background-color: teal;
+    }
+
+    .playing {
+        background-color: teal;
+    }
+</style>
 <template>
     <div class="row">
         <div class="col s12">
@@ -22,17 +42,28 @@
                 <div class="card-stacked">
                     <div class="card-content">
                         <span class="brown-text">
-                            Pattern: {{selectedPatternId}}
+                            Pattern: {{playingPatternId}}
                         </span>
                         <div>
-                            <input name="pattern" type="radio" value="A" id="radio-pattern-1" v-model="selectedPatternId" @change="setPatternId"/>
-                            <label for="radio-pattern-1"></label>
-                            <input name="pattern" type="radio" value="B" id="radio-pattern-2" v-model="selectedPatternId" @change="setPatternId"/>
-                            <label for="radio-pattern-2"></label>
-                            <input name="pattern" type="radio" value="C" id="radio-pattern-3" v-model="selectedPatternId" @change="setPatternId"/>
-                            <label for="radio-pattern-3"></label>
-                            <input name="pattern" type="radio" value="D" id="radio-pattern-4" v-model="selectedPatternId" @change="setPatternId"/>
-                            <label for="radio-pattern-4"></label>
+                            <div class="pattern-selector"
+                                 :class="cssClassOf('A')"
+                                 @click="setPatternId('A')">
+                            </div>
+
+                            <div class="pattern-selector"
+                                 :class="cssClassOf('B')"
+                                 @click="setPatternId('B')">
+                            </div>
+
+                            <div class="pattern-selector"
+                                 :class="cssClassOf('C')"
+                                 @click="setPatternId('C')">
+                            </div>
+
+                            <div class="pattern-selector"
+                                 :class="cssClassOf('D')"
+                                 @click="setPatternId('D')">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,6 +78,8 @@
         mounted(){
             const playerQuery = new PlayerQuery;
             PlayerEvents.PlayerStateChanged.subscribe(() => {
+                this.playingPatternId = playerQuery.playingPatternId();
+                this.nextPatternId =  playerQuery.nextPatternId();
                 this.isPlaying =  playerQuery.isPlaying();
                 this.areSoundsReady = playerQuery.areSoundsReady();
             })
@@ -56,7 +89,8 @@
             const playerQuery = new PlayerQuery;
             return {
                 bpm: playerQuery.bpm(),
-                selectedPatternId: (new SequencerQuery).selectedPatternId(),
+                playingPatternId: playerQuery.playingPatternId(),
+                nextPatternId: playerQuery.nextPatternId(),
                 isPlaying: playerQuery.isPlaying(),
                 areSoundsReady: playerQuery.areSoundsReady()
             }
@@ -76,9 +110,8 @@
                 this.bpm = bpm;
                 (new PlayerCommand).setBpm(bpm);
             },
-            setPatternId() {
-                (new SequencerCommand).selectPattern(this.selectedPatternId);
-                (new PlayerCommand).setNextPattern(this.selectedPatternId);
+            setPatternId(v) {
+                (new PlayerCommand).setNextPattern(v);
             },
             togglePlayingState(){
                 const command = new PlayerCommand;
@@ -86,6 +119,15 @@
                     command.stop()
                 } else {
                     command.play()
+                }
+            },
+            cssClassOf(patternName) {
+                if (this.playingPatternId == patternName) {
+                    return 'teal'
+                } else if (this.nextPatternId == patternName) {
+                    return 'orange'
+                } else {
+                    return '';
                 }
             }
         }

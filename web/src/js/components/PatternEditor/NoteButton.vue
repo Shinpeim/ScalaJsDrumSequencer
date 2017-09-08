@@ -28,6 +28,7 @@
             });
 
             PlayerEvents.PlayerStateChanged.subscribe(() => {
+                this.updateNote();
                 this.updatePlayingNotePosition();
             })
         },

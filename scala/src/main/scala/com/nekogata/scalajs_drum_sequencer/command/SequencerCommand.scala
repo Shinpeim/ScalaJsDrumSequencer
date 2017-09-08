@@ -1,22 +1,12 @@
 package com.nekogata.scalajs_drum_sequencer.command
 
+import com.nekogata.scalajs_drum_sequencer.domain.player.PlayerStateRepository
 import com.nekogata.scalajs_drum_sequencer.domain.sequener._
 
 trait SequencerCommand {
   val trackRepository: TrackRepository
   val sequencerStateRepository: SequencerStateRepository
-
-  def selectPattern(id: String): Unit = {
-    val patternId = id match {
-      case "A" => PatternA
-      case "B" => PatternB
-      case "C" => PatternC
-      case "D" => PatternD
-    }
-
-    val newState = sequencerStateRepository.get.selectPattern(patternId)
-    sequencerStateRepository.store(newState)
-  }
+  val playerStateRepository: PlayerStateRepository
 
   def selectTrack(name: String): Unit = {
      val trackName = name match {
@@ -33,8 +23,9 @@ trait SequencerCommand {
 
   def toggleNote(index: Int): Unit = {
     val sequencerState = sequencerStateRepository.get
+    val playerState = playerStateRepository.get
 
-    val p = sequencerState.selectedPatternId
+    val p = playerState.playingPatternId
     val tn = sequencerState.selectedTrackName
 
     val track = trackRepository.get(p, tn)
